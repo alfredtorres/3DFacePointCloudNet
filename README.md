@@ -39,3 +39,5 @@ w/o fine tune  | 93.38
 with fine tune  | 97.50
 
 **FRGCv2 ROC curve**
+
+![](https://github.com/alfredtorres/3DFacePointCloudNet/blob/master/img/frgc_result.png)
