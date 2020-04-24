@@ -62,7 +62,9 @@ class FurthestPointSampling(Function):
         torch.Tensor
             (B, npoint) tensor containing the set
         """
-        return _ext.furthest_point_sampling(xyz, npoint)
+        out = _ext.furthest_point_sampling(xyz, npoint)
+        ctx.mark_non_differentiable(out)
+        return out
 
     @staticmethod
     def backward(xyz, a=None):
@@ -271,7 +273,9 @@ class BallQuery(Function):
         torch.Tensor
             (B, npoint, nsample) tensor with the indicies of the features that form the query balls
         """
-        return _ext.ball_query(new_xyz, xyz, radius, nsample)
+        output = _ext.ball_query(new_xyz, xyz, fps_idx, radius, nsample)
+        ctx.mark_non_differentiable(output)
+        return output
 
     @staticmethod
     def backward(ctx, a=None):
